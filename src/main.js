@@ -7,7 +7,6 @@ import Profile from "./components/Profile.vue";
 import Vehicles from "./components/Vechicles.vue";
 import Settings from "./components/Settings.vue";
 
-createApp(App).mount("#app");
 const app = createApp(App);
 const routes = [
 	{
