@@ -98,7 +98,7 @@
   top: 0;
   bottom: 0;
   width: 256px;
-  background-image: url('./public/images/backgrounds/aside_background.jpg');
+  background-image: url('./images/backgrounds/aside_background.jpg');
 }
 .aside__title {
   text-align: center;

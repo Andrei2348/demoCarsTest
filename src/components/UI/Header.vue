@@ -1,4 +1,7 @@
 <template>
+  <header class="header">
+
+  
   <div class="header__wrapper">
     <div class="header__info">
       <h1 class="header__title">Vechicles</h1>
@@ -37,25 +40,34 @@
           </svg>
       </a>
       <div class="person__info-wrapper">
-        <img class="person__image" src="/public/images/user/Photo.png" alt="User image" />
+        <img class="person__image" src="/images/user/Photo.png" alt="User image" />
         <p class="person__name">John Doe</p>
       </div>
       <div class="header__language-selector">EN</div>
     </div>
   </div>
+  <SearchMenu />
+  </header>
 </template>
 
+<script setup>
+import SearchMenu from './SearchMenu.vue';
+</script>
+
 <style scopedd>
-.header__wrapper {
-  position: fixed;
+.header{
+position: fixed;
   top: 0;
   left: 256px;
   right: 0;
+  background-color: #fff;
+  z-index: 100;
+}
+.header__wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #E4E4E4;
-  background-color: #fff;
   padding: 30px 30px 30px 24px;
 }
 .header__info,
