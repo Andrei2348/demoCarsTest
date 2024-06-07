@@ -111,6 +111,7 @@
 		font-size: 20px;
 		font-weight: 700;
 		line-height: 22px;
+    height: 22px;
 		color: #293148;
 		margin-bottom: 12px;
 		padding-right: 10px;

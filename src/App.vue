@@ -10,7 +10,6 @@
   </main>
 </template>
 
-
 <script setup>
 import Aside from './components/UI/Aside.vue'
 import Header from './components/UI/Header.vue'
