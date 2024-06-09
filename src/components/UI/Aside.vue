@@ -1,7 +1,11 @@
 <!-- @format -->
 <template>
 	<div class="aside__wrapper">
-		<img class="aside__bcg" src="/public/images/backgrounds/wave.png" alt="background">
+		<img
+			class="aside__bcg"
+			src="/public/images/backgrounds/wave.png"
+			alt="background"
+		/>
 		<h2 class="aside__title">Demo Test</h2>
 		<ul class="aside__menu-items">
 			<li class="aside__menu-item">
@@ -31,9 +35,10 @@
 							stroke-width="2"
 							stroke-linecap="round"
 							stroke-linejoin="round"
-						/></svg>
-            Profile
-          </router-link>
+						/>
+					</svg>
+					Profile
+				</router-link>
 			</li>
 			<li class="aside__menu-item">
 				<router-link
@@ -69,7 +74,8 @@
 							stroke="white"
 							stroke-opacity="0.45"
 							stroke-width="2"
-						/></svg>Vehicles</router-link
+						/></svg
+					>Vehicles</router-link
 				>
 			</li>
 			<li class="aside__menu-item">
@@ -91,7 +97,8 @@
 							stroke-width="2"
 							stroke-linecap="round"
 							stroke-linejoin="round"
-						/></svg>Settings</router-link
+						/></svg
+					>Settings</router-link
 				>
 			</li>
 		</ul>
@@ -110,7 +117,7 @@
 		height: 100vh;
 		background-color: #282828;
 	}
-	.aside__bcg{
+	.aside__bcg {
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -131,17 +138,17 @@
 		margin-bottom: 16px;
 		padding: 12px 30px;
 		cursor: pointer;
-    transition: all ease .5s;
+		transition: all ease 0.5s;
 	}
-  .aside__menu-item .aside__menu-item--link{
-    transition: all ease .5s;
-  }
-  .aside__menu-item:hover{
-    background-color: #ffffff07;
-  }
-  .aside__menu-item:hover .aside__menu-item--link{
-    color: #e2e2e2;
-  }
+	.aside__menu-item .aside__menu-item--link {
+		transition: all ease 0.5s;
+	}
+	.aside__menu-item:hover {
+		background-color: #ffffff07;
+	}
+	.aside__menu-item:hover .aside__menu-item--link {
+		color: #e2e2e2;
+	}
 	.aside__menu-item--link {
 		font-size: 16px;
 		line-height: 20px;
@@ -153,10 +160,10 @@
 	.aside__menu-item--link svg {
 		margin-right: 20px;
 	}
-  .aside__menu-item:has(> .router-link-active) { 
-  background-color: #ffffff33;
-}
-.aside__menu-item:has(> .router-link-active) .aside__menu-item--link {
-  color: #ffffff;
-}
+	.aside__menu-item:has(> .router-link-active) {
+		background-color: #ffffff33;
+	}
+	.aside__menu-item:has(> .router-link-active) .aside__menu-item--link {
+		color: #ffffff;
+	}
 </style>

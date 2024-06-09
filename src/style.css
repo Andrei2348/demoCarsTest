@@ -1,30 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
 html {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
-  padding: 0;
-  margin: 0;
+	box-sizing: inherit;
+	padding: 0;
+	margin: 0;
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  min-width: 320px;
-  overflow-x: hidden;
-  color: #cec7bb;
+	font-family: "DM Sans", sans-serif;
+	font-weight: 300;
+	font-size: 16px;
+	min-width: 320px;
+	overflow-x: hidden;
+	color: #cec7bb;
 }
 
 a {
-  display: block;
-  text-decoration: none;
+	display: block;
+	text-decoration: none;
 }
 
 h1,
@@ -33,30 +33,24 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 ul,
 li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 html,
 body {
-  height: 100vh;
-}
-.container{
-  max-width: 1140px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 10px;
+	height: 100vh;
 }
