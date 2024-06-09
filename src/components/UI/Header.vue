@@ -79,14 +79,11 @@
 	import { useStore } from "vuex";
 	const store = useStore();
 	const totalCards = ref(0);
-	console.log(totalCards.value);
 
-	const numberOfCards = computed(
-		() => store.getters.totalCards
-	);
+	const numberOfCards = computed(() => store.getters.totalCards);
 
 	watch(numberOfCards, (newValue) => {
-		totalCards.value = newValue
+		totalCards.value = newValue;
 	});
 
 	onMounted(() => {

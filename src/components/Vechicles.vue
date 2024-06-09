@@ -90,7 +90,6 @@
 					perPages.value = response.data.meta.last_page;
 					currentPage.value = response.data.meta.current_page;
 					totalCards.value = response.data.meta.total;
-					console.log(totalCards.value);
 					store.commit("setTotalCards", totalCards.value);
 					seen.value = response.data.meta.to;
 					// Адреса для пагинации
