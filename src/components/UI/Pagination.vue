@@ -1,13 +1,11 @@
 <template>
 	<div class="pagination__wrapper">
-		<p class="pagination__info">
-			Showing {{ seen }} out of {{ totalCards }}
-		</p>
+		<p class="pagination__info">Showing {{ seen }} out of {{ totalCards }}</p>
 		<div class="pagination__navigation-wrapper">
 			<div
 				class="pagination__button-back"
-				@click="() => emit('fetchItems', urls.prev)"
-        :disabled="currentPage === null"
+				@click="() => emit('switchByPagination', urls.prev)"
+				:disabled="currentPage === null"
 			>
 				<svg
 					width="6"
@@ -31,8 +29,8 @@
 			<span class="pagination__info-current">{{ perPages }}</span>
 			<div
 				class="pagination__button-next"
-				@click="() => emit('fetchItems', urls.next)"
-        :disabled="currentPage === perPages"
+				@click="() => emit('switchByPagination', urls.next)"
+				:disabled="currentPage === perPages"
 			>
 				<svg
 					width="6"
@@ -60,11 +58,11 @@
 		perPages: Number,
 		currentPage: Number,
 		totalCards: Number,
-    seen: Number,
+		seen: Number,
 		urls: Object,
 	});
 
-	const emit = defineEmits(["fetchItems"]);
+	const emit = defineEmits(["switchByPagination"]);
 </script>
 
 <style scoped>

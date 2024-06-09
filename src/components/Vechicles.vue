@@ -13,12 +13,22 @@
 				:created_at="item.created_at"
 			/>
 			<p
-				class="vehicles__message"
-				v-else
+				v-if="
+					items.data !== undefined &&
+					Object.keys(items.data).length === 0 &&
+					!isLoading
+				"
+				class="vehicles__service-info"
 			>
 				The list of cars is empty...
 			</p>
 		</div>
+		<p
+			class="vehicles__service-info"
+			v-if="isLoading"
+		>
+			Loading...
+		</p>
 		<div
 			class="vehicles__pagination"
 			v-if="items.data !== undefined && Object.keys(items.data).length !== 0"
@@ -29,56 +39,85 @@
 				:urls="urls"
 				:totalCards="totalCards"
 				:seen="seen"
-				@fetchItems="fetchItems"
+				@switchByPagination="switchByPagination"
 			/>
 		</div>
 	</div>
 </template>
 <script setup>
-	import { computed, ref, reactive, provide, onMounted, watch } from "vue";
+	import { computed, ref, reactive, onMounted, watch } from "vue";
 	import axios from "axios";
+	import { useStore } from "vuex";
 	import Card from "./Card.vue";
 	import Pagination from "./UI/Pagination.vue";
 	import SearchPanel from "./UI/SearchPanel.vue";
-
-	// https://api.caiman-app.de/api/cars-test?search=2323&per_page=9&page=1
+	const store = useStore();
 	const items = ref([]);
 	const perPages = ref([]);
 	const currentPage = ref([]);
-	const numberOfCards = ref(9);
 	const totalCards = ref();
 	const seen = ref();
+	const searchData = ref("");
+	const isLoading = ref(false);
 	const urls = reactive({});
-	const currentUrl = "http://api.caiman-app.de/api/cars-test?&page=1";
+	const currentUrl = "https://api.caiman-app.de/api/cars-test?&page=1";
 
 	const onChangeSearchInput = (data) => {
-		const searchUrl = `https://api.caiman-app.de/api/cars-test?search=${data}&per_page=${perPages}`;
-		fetchItems(searchUrl);
+		searchData.value = data;
+		let searchUrl = null;
+		if (searchData.value.length === 0) {
+			searchUrl = currentUrl;
+		} else {
+			searchUrl = `https://api.caiman-app.de/api/cars-test?search=${data}`;
+		}
+		fetchItems(searchUrl, store.getters.quantityCardsOnPage);
 	};
 
-	const fetchItems = async (currentUrl) => {
+	const switchByPagination = (url) => {
+		if (searchData.value.length !== 0) {
+			url = currentUrl + `?search=${searchData.value}`;
+		}
+		fetchItems(url, store.getters.quantityCardsOnPage);
+	};
+
+	const fetchItems = async (currentUrl, quantityCards = 9) => {
 		try {
+			isLoading.value = true;
 			await axios
-				.get(currentUrl + "&per_page=" + numberOfCards.value)
+				.get(currentUrl + "&per_page=" + quantityCards)
 				.then((response) => {
 					items.value = response.data;
 					perPages.value = response.data.meta.last_page;
 					currentPage.value = response.data.meta.current_page;
 					totalCards.value = response.data.meta.total;
+					console.log(totalCards.value);
+					store.commit("setTotalCards", totalCards.value);
 					seen.value = response.data.meta.to;
 					// Адреса для пагинации
-					urls.first = response.data.links.first;
-					urls.last = response.data.links.last;
 					urls.next = response.data.links.next;
 					urls.prev = response.data.links.prev;
-
-					console.log(typeof items.value.data);
 				})
-				.then(console.log("all done"));
+				.then(() => {
+					window.scrollTo({ top: 0, behavior: "smooth" });
+				});
 		} catch (error) {
 			console.log(error);
+		} finally {
+			isLoading.value = false;
 		}
 	};
+
+	const numberOfCardsChanged = computed(
+		() => store.getters.quantityCardsOnPage
+	);
+
+	watch(numberOfCardsChanged, (newValue) => {
+		if (searchData.value.length === 0) {
+			fetchItems(currentUrl, newValue);
+		} else {
+			onChangeSearchInput(searchData.value);
+		}
+	});
 
 	onMounted(async () => {
 		fetchItems(currentUrl);
@@ -97,18 +136,18 @@
 		gap: 30px;
 		padding: 110px 30px 0 30px;
 	}
-	.vehicles__message {
-		font-size: 20px;
+	.vehicles__service-info {
+		font-size: 32px;
+		line-height: 1;
 		font-weight: 700;
-		line-height: 1.2;
 		color: #293148;
 		margin-top: 70px;
+		margin-left: 30px;
 	}
 	.vehicles__pagination {
 		position: absolute;
 		bottom: 0;
 		right: 0;
 		left: 0;
-		z-index: -10;
 	}
 </style>

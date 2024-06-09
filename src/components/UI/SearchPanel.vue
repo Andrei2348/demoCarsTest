@@ -64,7 +64,7 @@
 	import NumberOfCardsSelector from './NumberOfCardsSelector.vue'
 
 
-	const emit = defineEmits(["searchEvent"]);
+	const emit = defineEmits(["onChangeSearchInput"]);
 	const onChangeSearchInput = debounce((event) => {
 		emit("onChangeSearchInput", event.target.value);
 	}, 500);

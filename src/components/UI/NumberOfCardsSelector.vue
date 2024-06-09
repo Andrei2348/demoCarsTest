@@ -29,7 +29,7 @@
 			<div
 				class="option"
 				v-for="option in options"
-				@click="selectOption(option)"
+				@click="selectQuantity(option)"
 			>
 				{{ option }}
 			</div>
@@ -39,13 +39,15 @@
 
 <script setup>
 	import { ref } from "vue";
+	import { useStore } from "vuex";
+	const store = useStore();
+	const selected = ref(store.getters.quantityCardsOnPage);
 	const isOpen = ref(false);
-	const selected = ref(18);
 	const options = [6, 9, 12, 15, 18];
 
-	const selectOption = (option) => {
+	const selectQuantity = (option) => {
 		selected.value = option;
-		console.log(selected.value);
+		store.commit("setQuantity", selected.value);
 	};
 </script>
 
@@ -54,7 +56,6 @@
 		position: relative;
 		width: 85px;
 	}
-
 	.selected {
 		border: 1px solid #e4e4e4;
 		border-radius: 8px;
@@ -67,22 +68,29 @@
 		font-weight: 400;
 		line-height: 22px;
 		margin-left: 16px;
+		transition: all ease 0.5s;
+	}
+	.selected:hover {
+		background-color: #f0f0f0;
 	}
 	.selected,
 	.option {
 		padding: 10px;
 		cursor: pointer;
 	}
-
 	.options {
+		color: #293148;
 		position: absolute;
-		width: 100%;
+		right: -16px;
+		width: 70%;
 		text-align: center;
 		background-color: #fff;
 		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	}
-
+	.options .option {
+		transition: all ease 0.5s;
+	}
 	.options .option:hover {
-		background-color: #ddd;
+		background-color: #f0f0f0;
 	}
 </style>

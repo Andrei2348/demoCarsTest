@@ -2,7 +2,7 @@
 	<div class="header__wrapper">
 		<div class="header__info">
 			<h1 class="header__title">Vechicles</h1>
-			<span class="header__count">256</span>
+			<span class="header__count">{{ totalCards }}</span>
 		</div>
 		<div class="header__person-menu">
 			<a
@@ -46,12 +46,53 @@
 				/>
 				<p class="person__name">John Doe</p>
 			</div>
-			<div class="header__language-selector">EN</div>
+			<div class="header__language-selector">
+				<img
+					class="header__language-icon"
+					src="/images/icons/uk.png"
+					alt=""
+				/>
+				<span class="header__language-text">En</span>
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M16 10L12 14L8 10"
+						stroke="#293148"
+						stroke-opacity="0.6"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+			</div>
 		</div>
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+	import { ref, onMounted, watch, computed } from "vue";
+	import { useStore } from "vuex";
+	const store = useStore();
+	const totalCards = ref(0);
+	console.log(totalCards.value);
+
+	const numberOfCards = computed(
+		() => store.getters.totalCards
+	);
+
+	watch(numberOfCards, (newValue) => {
+		totalCards.value = newValue
+	});
+
+	onMounted(() => {
+		totalCards.value = store.getters.totalCards;
+	});
+</script>
 
 <style scopedd>
 	.header__wrapper {
@@ -102,11 +143,31 @@
 		width: 46px;
 		margin-right: 14px;
 	}
-	.person__name,
-	.header__language-selector {
+	.person__name {
 		font-size: 15px;
 		font-weight: 500;
 		line-height: 22px;
 		color: #293148;
+	}
+	.header__language-selector {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		padding: 2px;
+	}
+	.header__language-icon {
+		margin-right: 14px;
+		height: 24px;
+		width: 24px;
+	}
+	.header__language-text {
+		font-size: 15px;
+		line-height: 22px;
+		font-weight: 500;
+		color: #293148;
+		margin-right: 10px;
+	}
+	.header__language-selector svg {
+		transform: scale(1.1);
 	}
 </style>

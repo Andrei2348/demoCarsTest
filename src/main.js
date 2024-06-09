@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
+import store from "./store/store.js";
 import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Profile from "./components/Profile.vue";
@@ -36,4 +37,5 @@ const router = createRouter({
 
 app.use(autoAnimatePlugin);
 app.use(router);
+app.use(store);
 app.mount("#app");
