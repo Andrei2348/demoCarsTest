@@ -1,6 +1,7 @@
 <!-- @format -->
 <template>
 	<div class="aside__wrapper">
+		<img class="aside__bcg" src="/public/images/backgrounds/wave.png" alt="background">
 		<h2 class="aside__title">Demo Test</h2>
 		<ul class="aside__menu-items">
 			<li class="aside__menu-item">
@@ -106,17 +107,15 @@
 		top: 0;
 		bottom: 0;
 		width: 256px;
+		height: 100vh;
 		background-color: #282828;
 	}
-	.aside__wrapper::after{
-		content: '';
+	.aside__bcg{
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		right: 0;
-		background-image: url('/images/backgrounds/wave.png');
-		width: 100%;
-		height: 100%;
+		width: 256px;
+		height: 135px;
 	}
 	.aside__title {
 		text-align: center;
