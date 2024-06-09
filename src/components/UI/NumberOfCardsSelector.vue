@@ -2,6 +2,7 @@
 	<div
 		class="custom-select"
 		@click="isOpen = !isOpen"
+		ref="menu"
 	>
 		<div class="selected">
 			{{ selected }}
@@ -38,9 +39,10 @@
 </template>
 
 <script setup>
-	import { ref } from "vue";
+	import { ref, onMounted, onUnmounted } from "vue";
 	import { useStore } from "vuex";
 	const store = useStore();
+	const menu = ref(null);
 	const selected = ref(store.getters.quantityCardsOnPage);
 	const isOpen = ref(false);
 	const options = [6, 9, 12, 15, 18];
@@ -49,6 +51,20 @@
 		selected.value = option;
 		store.commit("setQuantity", selected.value);
 	};
+
+	const handleClickOutside = (event) => {
+		if (menu.value && !menu.value.contains(event.target)) {
+			isOpen.value = false;
+		}
+	};
+
+	onMounted(() => {
+		document.addEventListener("click", handleClickOutside);
+	});
+
+	onUnmounted(() => {
+		document.removeEventListener("click", handleClickOutside);
+	});
 </script>
 
 <style scoped>
