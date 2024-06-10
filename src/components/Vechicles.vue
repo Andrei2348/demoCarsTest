@@ -75,8 +75,8 @@
 
 	const switchByPagination = (url) => {
 		if (searchData.value.length !== 0) {
-			console.log(url)
-			url = url + `?search=${searchData.value}`;
+			console.log(url);
+			url = currentUrl + `?search=${searchData.value}`;
 		}
 		fetchItems(url, store.getters.quantityCardsOnPage);
 	};
